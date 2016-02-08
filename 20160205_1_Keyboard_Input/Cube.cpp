@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <windowsx.h>
 #include "Cube.h"
 
@@ -12,14 +13,14 @@ Cube::~Cube()
 
 void Cube::Initialize()
 {
-	vertex[0] = Vector3D(-1, -1, -1);
-	vertex[1] = Vector3D(-1, 1, -1);
-	vertex[2] = Vector3D(1, 1, -1);
-	vertex[3] = Vector3D(1, -1, -1);
-	vertex[4] = Vector3D(-1, -1, 1);
-	vertex[5] = Vector3D(-1, 1, 1);
-	vertex[6] = Vector3D(1, 1, 1);
-	vertex[7] = Vector3D(1, -1, 1);
+	vertex[0] = Vector3D(-1, 0, -1);
+	vertex[1] = Vector3D(-1, 2, -1);
+	vertex[2] = Vector3D(1, 2, -1);
+	vertex[3] = Vector3D(1, 0, -1);
+	vertex[4] = Vector3D(-1, 0, 1);
+	vertex[5] = Vector3D(-1, 2, 1);
+	vertex[6] = Vector3D(1, 2, 1);
+	vertex[7] = Vector3D(1, 0, 1);
 
 	triangles[0] = Triangle(0, 1, 2);
 	triangles[1] = Triangle(0, 2, 3);
@@ -84,6 +85,19 @@ void Cube::Render(HDC targetDC,
 
 void Cube::Update()
 {
+	Matrix translation;
+	Matrix::Translation(translation, 0, 0, speed);
+
+	if (KEYMANAGER->isStayKeyDown('W'))
+	{
+		speed += 0.05f;
+	}
+
+	if (KEYMANAGER->isStayKeyDown('S'))
+	{
+		speed -= 0.05f;
+	}
+
 	Matrix rotY;	//y축을 기준으로 회전하는 메트릭스
 	//yRadian = (float)PI * 0.25f;
 	Matrix::RotationY(rotY, yRadian);
@@ -92,12 +106,11 @@ void Cube::Update()
 	//xRadian = (float)PI * 0.25f;
 	Matrix::RotationX(rotX, xRadian);
 
-
-
 	//항상 초기화 필요
 	Matrix::Identity(world);
 	//world = world * rotY;
 	//world = rotY;	//위 라인이랑 같은 코드
+	world = world * translation;
 	world = world * rotX * rotY;	//x,y순서에 따라 방향이 틀려짐
 		
 }

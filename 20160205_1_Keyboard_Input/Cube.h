@@ -54,5 +54,7 @@ protected:
 
 	float xRadian = 0.0f;
 	float yRadian = 0.0f;
+
+	float speed = 0.0f;
 };
 

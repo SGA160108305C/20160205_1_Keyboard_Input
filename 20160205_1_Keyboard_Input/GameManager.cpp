@@ -18,6 +18,8 @@ void GameManager::Initialize(HWND handle)
 {
 	windowHandle = handle;
 
+	KEYMANAGER->init();
+
 	gameStates[GAME_STATE::TEST] = new GameState_Test();
 	currentState = GAME_STATE::TEST;
 	ChangeGameState(currentState);	
@@ -53,7 +55,8 @@ void GameManager::Initialize(HWND handle)
 
 void GameManager::Destroy()
 {
-	
+	KEYMANAGER->releaseSingleton();
+
 	if ( hOldBitmap )
 	{
 		SelectObject(hMemDC, hOldBitmap);

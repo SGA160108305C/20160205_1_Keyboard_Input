@@ -10,10 +10,15 @@
 using namespace std;
 #pragma comment(lib, "winmm.lib")
 
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+
 //수학용
 #include "MathDefines.h"
 #include "Vector3D.h"
 #include "Matrix.h"
+
+#include "keyManager.h"
+#define KEYMANAGER keyManager::getSingleton()
 
 //각종 게임 상태들
 #include "GameState.h"
