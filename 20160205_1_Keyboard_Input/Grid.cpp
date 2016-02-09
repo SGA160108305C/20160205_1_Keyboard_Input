@@ -37,14 +37,14 @@ void Grid::Initialize(int lineCount /*= 10*/, float interval/* = 1.0f*/)
 	}
 
 	//รเ
-	color = RGB(255, 0, 0);
+	/*color = RGB(255, 0, 0);
 	lines.push_back(Line(Vector3D(edge, 0.0f, 0.0f), Vector3D(-edge, 0.0f, 0.0f), color));
 
 	color = RGB(0, 255, 0);
 	lines.push_back(Line(Vector3D(0.0f, edge, 0.0f), Vector3D(0.0f, -edge, 0.0f), color));
 
 	color = RGB(0, 0, 255);
-	lines.push_back(Line(Vector3D(0.0f, 0.0f, edge), Vector3D(0.0f, 0.0f, -edge), color));
+	lines.push_back(Line(Vector3D(0.0f, 0.0f, edge), Vector3D(0.0f, 0.0f, -edge), color));*/
 
 }
 

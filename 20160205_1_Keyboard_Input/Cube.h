@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <list>
 #include "Vector3D.h"
 #include "Matrix.h"
 #include "MathDefines.h"
@@ -19,6 +20,27 @@ struct Triangle
 		vertexIndex[2] = index3;
 	}
 	int vertexIndex[3];
+};
+
+class CubeAxis
+{
+public:
+	CubeAxis()
+	{
+		start = end = Vector3D();
+		color = RGB(50, 50, 50);
+	}
+	CubeAxis(Vector3D& _start, Vector3D& _end, COLORREF _color = RGB(50, 50, 50))
+	{
+		start = _start;
+		end = _end;
+		color = _color;
+	}
+	~CubeAxis(){};
+
+	Vector3D start;
+	Vector3D end;
+	COLORREF color;
 };
 
 class Cube
@@ -56,5 +78,8 @@ protected:
 	float yRadian = 0.0f;
 
 	float speed = 0.0f;
+
+private:
+	std::list<CubeAxis> lines;
 };
 
