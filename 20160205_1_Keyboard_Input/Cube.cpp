@@ -13,16 +13,16 @@ Cube::~Cube()
 
 void Cube::Initialize()
 {
-	float edge = 3.0f;
+	float edgeAxis = 3.0f;
 	COLORREF color = RGB(255, 0, 0);
 
-	lines.push_back(CubeAxis(Vector3D(edge, 0.0f, 0.0f), Vector3D(-edge, 0.0f, 0.0f), color));
+	lines.push_back(CubeAxis(Vector3D(edgeAxis, 0.0f, 0.0f), Vector3D(-edgeAxis, 0.0f, 0.0f), color));
 
 	color = RGB(0, 255, 0);
-	lines.push_back(CubeAxis(Vector3D(0.0f, edge, 0.0f), Vector3D(0.0f, -edge, 0.0f), color));
+	lines.push_back(CubeAxis(Vector3D(0.0f, edgeAxis, 0.0f), Vector3D(0.0f, -edgeAxis, 0.0f), color));
 
 	color = RGB(0, 0, 255);
-	lines.push_back(CubeAxis(Vector3D(0.0f, 0.0f, edge), Vector3D(0.0f, 0.0f, -edge), color));
+	lines.push_back(CubeAxis(Vector3D(0.0f, 0.0f, edgeAxis), Vector3D(0.0f, 0.0f, -edgeAxis), color));
 
 	vertex[0] = Vector3D(-1, -1, -1);
 	vertex[1] = Vector3D(-1, 1, -1);
@@ -112,16 +112,48 @@ void Cube::Render(HDC targetDC,
 void Cube::Update()
 {
 	Matrix translation;
-	Matrix::Translation(translation, 0, 3, speed);
+	Matrix::Translation(translation, speedX, speedY, speedZ);
 
-	if (KEYMANAGER->isStayKeyDown('W'))
+	if (KEYMANAGER->isStayKeyDown('W') && speedZ < edgeGrid)
 	{
-		speed += 0.01f;
+		speedZ += 0.01f;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S'))
+	if (KEYMANAGER->isStayKeyDown('S') && speedZ > -edgeGrid)
 	{
-		speed -= 0.01f;
+		speedZ -= 0.01f;
+	}
+
+	if (KEYMANAGER->isStayKeyDown('A') && speedX > -edgeGrid)
+	{
+		speedX -= 0.01f;
+	}
+
+	if (KEYMANAGER->isStayKeyDown('D') && speedX < edgeGrid)
+	{
+		speedX += 0.01f;
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_SPACE))
+	{
+		hasCubeJumped = true;
+	}
+
+	if (hasCubeJumped)
+	{
+		speedX += cosf(jumpAngle) * jumpSpeed;
+		speedY += -sinf(jumpAngle) * jumpSpeed + gravity;
+		gravity += 0.1f;
+
+		if (speedY < modelY)
+		{
+			printf_s("%.2f", speedY);
+
+			speedY = modelY;
+			jumpSpeed = 2.0f;
+			gravity = 0.0f;
+			hasCubeJumped = false;
+		}
 	}
 
 	Matrix rotY;	//y축을 기준으로 회전하는 메트릭스
@@ -136,7 +168,7 @@ void Cube::Update()
 	Matrix::Identity(world);
 	//world = world * rotY;
 	//world = rotY;	//위 라인이랑 같은 코드
-	world = world * rotY;	//x,y순서에 따라 방향이 틀려짐
+	world = world * rotX * rotY;	//x,y순서에 따라 방향이 틀려짐
 	world = world * translation;
 		
 }

@@ -77,7 +77,16 @@ protected:
 	float xRadian = 0.0f;
 	float yRadian = 0.0f;
 
-	float speed = 0.0f;
+	float modelY = 3.0f;
+	float speedX = 0.0f;
+	float speedY = modelY;
+	float speedZ = 0.0f;
+
+	float jumpAngle = PI_HALF;
+	float jumpSpeed = 2.0f;
+	float gravity = 0.0f;
+
+	bool hasCubeJumped = false;
 
 private:
 	std::list<CubeAxis> lines;

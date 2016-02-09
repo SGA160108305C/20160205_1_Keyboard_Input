@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 GameManager g_GameManager;
+float edgeGrid = 0.0f;
 
 HINSTANCE hInst;
 

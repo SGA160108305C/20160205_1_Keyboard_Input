@@ -15,7 +15,7 @@ void Grid::Initialize(int lineCount /*= 10*/, float interval/* = 1.0f*/)
 {
 	lines.clear();
 	int halfLineCount = (int)(lineCount * 0.5f);
-	float edge = (float)halfLineCount * interval;
+	edgeGrid = (float)halfLineCount * interval;
 
 	//일반 줄
 	COLORREF color = 0;
@@ -30,21 +30,21 @@ void Grid::Initialize(int lineCount /*= 10*/, float interval/* = 1.0f*/)
 			color = RGB(128, 128, 128);
 		}
 
-		lines.push_back(Line(Vector3D(edge, 0.0f, (float)i), Vector3D(-edge, 0.0f, (float)i), color));
-		lines.push_back(Line(Vector3D(edge, 0.0f, (float)-i), Vector3D(-edge, 0.0f, (float)-i), color));
-		lines.push_back(Line(Vector3D((float)i, 0.0f, edge), Vector3D((float)i, 0.0f, -edge), color));
-		lines.push_back(Line(Vector3D((float)-i, 0.0f, edge), Vector3D((float)-i, 0.0f, -edge), color));
+		lines.push_back(Line(Vector3D(edgeGrid, 0.0f, (float)i), Vector3D(-edgeGrid, 0.0f, (float)i), color));
+		lines.push_back(Line(Vector3D(edgeGrid, 0.0f, (float)-i), Vector3D(-edgeGrid, 0.0f, (float)-i), color));
+		lines.push_back(Line(Vector3D((float)i, 0.0f, edgeGrid), Vector3D((float)i, 0.0f, -edgeGrid), color));
+		lines.push_back(Line(Vector3D((float)-i, 0.0f, edgeGrid), Vector3D((float)-i, 0.0f, -edgeGrid), color));
 	}
 
 	//축
 	/*color = RGB(255, 0, 0);
-	lines.push_back(Line(Vector3D(edge, 0.0f, 0.0f), Vector3D(-edge, 0.0f, 0.0f), color));
+	lines.push_back(Line(Vector3D(edgeGrid, 0.0f, 0.0f), Vector3D(-edgeGrid, 0.0f, 0.0f), color));
 
 	color = RGB(0, 255, 0);
-	lines.push_back(Line(Vector3D(0.0f, edge, 0.0f), Vector3D(0.0f, -edge, 0.0f), color));
+	lines.push_back(Line(Vector3D(0.0f, edgeGrid, 0.0f), Vector3D(0.0f, -edgeGrid, 0.0f), color));
 
 	color = RGB(0, 0, 255);
-	lines.push_back(Line(Vector3D(0.0f, 0.0f, edge), Vector3D(0.0f, 0.0f, -edge), color));*/
+	lines.push_back(Line(Vector3D(0.0f, 0.0f, edgeGrid), Vector3D(0.0f, 0.0f, -edgeGrid), color));*/
 
 }
 

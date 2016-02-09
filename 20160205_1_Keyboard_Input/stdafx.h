@@ -29,3 +29,4 @@ using namespace std;
 
 
 extern GameManager g_GameManager;
+extern float edgeGrid;
