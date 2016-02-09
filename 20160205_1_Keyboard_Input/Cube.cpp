@@ -139,18 +139,17 @@ void Cube::Update()
 		hasCubeJumped = true;
 	}
 
+	printf_s("%d", hasCubeJumped);
+
 	if (hasCubeJumped)
 	{
 		speedX += cosf(jumpAngle) * jumpSpeed;
-		speedY += -sinf(jumpAngle) * jumpSpeed + gravity;
-		gravity += 0.1f;
+		speedY -= -sinf(jumpAngle) * jumpSpeed - gravity;
+		gravity -= 0.0007f;
 
 		if (speedY < modelY)
 		{
-			printf_s("%.2f", speedY);
-
 			speedY = modelY;
-			jumpSpeed = 2.0f;
 			gravity = 0.0f;
 			hasCubeJumped = false;
 		}

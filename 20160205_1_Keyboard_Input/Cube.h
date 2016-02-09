@@ -83,7 +83,7 @@ protected:
 	float speedZ = 0.0f;
 
 	float jumpAngle = PI_HALF;
-	float jumpSpeed = 2.0f;
+	float jumpSpeed = 0.07f;
 	float gravity = 0.0f;
 
 	bool hasCubeJumped = false;
