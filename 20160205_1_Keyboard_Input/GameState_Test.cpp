@@ -60,7 +60,7 @@ void GameState_Test::OnEnterState()
 		mainCamera = nullptr;
 	}
 	mainCamera = new Camera();
-	mainCamera->Initialize(myCube->getCubePosition());
+	mainCamera->Initialize(myCube->getCubePosition(), myCube->getXradian(), myCube->getYradian());
 
 	if (grid != nullptr)
 	{

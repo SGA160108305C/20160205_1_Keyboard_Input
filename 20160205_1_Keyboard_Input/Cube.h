@@ -59,6 +59,8 @@ public:
 
 	LRESULT CubeInputProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	Vector3D* getCubePosition() { return &position; }
+	float* getXradian() { return &xRadian; }
+	float* getYradian() { return &yRadian; }
 
 protected:
 	float rotationAxisX = 0.0f;

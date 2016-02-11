@@ -8,7 +8,7 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Initialize(Vector3D* position = nullptr);
+	void Initialize(Vector3D* cubePosition = nullptr, float* xRadian = nullptr, float* yRadian = nullptr);
 	void Destroy();
 	void Update();
 
@@ -35,6 +35,8 @@ private :
 	bool mouseDown = false;
 	POINT mouseStart;
 
-	Vector3D* cubePosition;
+	Vector3D* pCubePosition;
+	float* pXradian;
+	float* pYradian;
 };
 

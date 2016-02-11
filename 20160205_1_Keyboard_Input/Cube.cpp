@@ -121,14 +121,24 @@ void Cube::Update()
 		position -= direction * 0.01f;
 	}
 
+	if (KEYMANAGER->isStayKeyDown('Q'))
+	{
+		xRadian -= 0.001f;
+	}
+
+	if (KEYMANAGER->isStayKeyDown('E'))
+	{
+		xRadian += 0.001f;
+	}
+
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		yRadian -= 0.01f;
+		yRadian -= 0.001f;
 	}
 
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		yRadian += 0.01f;
+		yRadian += 0.001f;
 	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_SPACE))
