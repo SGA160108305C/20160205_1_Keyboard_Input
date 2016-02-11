@@ -12,8 +12,9 @@ Camera::~Camera()
 {
 }
 
-void Camera::Initialize()
+void Camera::Initialize(Vector3D* position)
 {
+	cubePosition = position;
 	Matrix::View(viewMatrix, eye, lookAt, up);
 	Matrix::Projection(projectionMatrix,
 		fov, (float)GameManager::RESOLUTION_X / (float)GameManager::RESOLUTION_Y,
@@ -33,6 +34,12 @@ void Camera::Update()
 
 	eye = Vector3D(0, 0, -cameraDistance);
 	eye = rotX * rotY * eye;
+
+	if (cubePosition)
+	{
+		lookAt = (*cubePosition);
+		eye = (*cubePosition) + eye;
+	}
 
 	Matrix::View(viewMatrix, eye, lookAt, up);
 }

@@ -58,6 +58,7 @@ public:
 		const Matrix& viewport );
 
 	LRESULT CubeInputProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	Vector3D* getCubePosition() { return &position; }
 
 protected:
 	float rotationAxisX = 0.0f;
@@ -78,9 +79,9 @@ protected:
 	float yRadian = 0.0f;
 
 	float modelY = 3.0f;
-	float speedX = 0.0f;
-	float speedY = modelY;
-	float speedZ = 0.0f;
+
+	Vector3D direction = Vector3D(0, modelY, 1);
+	Vector3D position = Vector3D(0, 3, 0);
 
 	float jumpAngle = PI_HALF;
 	float jumpSpeed = 0.07f;

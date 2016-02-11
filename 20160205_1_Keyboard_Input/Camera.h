@@ -8,7 +8,7 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Initialize();
+	void Initialize(Vector3D* position = nullptr);
 	void Destroy();
 	void Update();
 
@@ -34,5 +34,7 @@ private :
 
 	bool mouseDown = false;
 	POINT mouseStart;
+
+	Vector3D* cubePosition;
 };
 

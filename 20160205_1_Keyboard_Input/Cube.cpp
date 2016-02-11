@@ -111,25 +111,22 @@ void Cube::Render(HDC targetDC,
 
 void Cube::Update()
 {
-	Matrix translation;
-	Matrix::Translation(translation, speedX, speedY, speedZ);
-
-	if (KEYMANAGER->isStayKeyDown('W') && speedZ < edgeGrid)
+	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		speedZ += 0.01f;
+		position += direction * 0.01f;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S') && speedZ > -edgeGrid)
+	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		speedZ -= 0.01f;
+		position -= direction * 0.01f;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('A') && speedX > -edgeGrid)
+	if (KEYMANAGER->isStayKeyDown('A'))
 	{
 		yRadian -= 0.01f;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('D') && speedX < edgeGrid)
+	if (KEYMANAGER->isStayKeyDown('D'))
 	{
 		yRadian += 0.01f;
 	}
@@ -143,13 +140,13 @@ void Cube::Update()
 
 	if (hasCubeJumped)
 	{
-		speedX += cosf(jumpAngle) * jumpSpeed;
-		speedY -= -sinf(jumpAngle) * jumpSpeed - gravity;
+		position.x += cosf(jumpAngle) * jumpSpeed;
+		position.y -= -sinf(jumpAngle) * jumpSpeed - gravity;
 		gravity -= 0.0007f;
 
-		if (speedY < modelY)
+		if (position.y < modelY)
 		{
-			speedY = modelY;
+			position.y = modelY;
 			gravity = 0.0f;
 			hasCubeJumped = false;
 		}
@@ -168,6 +165,10 @@ void Cube::Update()
 	//world = world * rotY;
 	//world = rotY;	//위 라인이랑 같은 코드
 	world = world * rotX * rotY;	//x,y순서에 따라 방향이 틀려짐
+	direction = world * Vector3D(0, 0, 1);
+
+	Matrix translation;
+	Matrix::Translation(translation, position.x, position.y, position.z);
 	world = world * translation;
 		
 }
