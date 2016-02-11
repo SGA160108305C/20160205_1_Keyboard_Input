@@ -126,12 +126,12 @@ void Cube::Update()
 
 	if (KEYMANAGER->isStayKeyDown('A') && speedX > -edgeGrid)
 	{
-		speedX -= 0.01f;
+		yRadian -= 0.01f;
 	}
 
 	if (KEYMANAGER->isStayKeyDown('D') && speedX < edgeGrid)
 	{
-		speedX += 0.01f;
+		yRadian += 0.01f;
 	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_SPACE))
