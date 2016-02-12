@@ -30,7 +30,7 @@ void Camera::Destroy()
 
 void Camera::Update()
 {
-	if (pXradian)
+	/*if (pXradian)
 	{
 		camRotX = (*pXradian);
 	}
@@ -38,7 +38,7 @@ void Camera::Update()
 	if (pYradian)
 	{
 		camRotY = (*pYradian);
-	}
+	}*/
 
 	Matrix rotX, rotY;
 	Matrix::RotationX(rotX, camRotX);
